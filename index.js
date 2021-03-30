@@ -9,11 +9,9 @@ const app = require("express")();
 const http = require('http');
 const server = http.createServer(app);
 
-
-
 require("./config/express")(app, config);
 require("./config/app")(app);
-// require("./routes/router")(app);
+require("./routes/router")(app);
 
 
 app.use(globalErrorHandler);

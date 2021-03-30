@@ -22,10 +22,14 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
     },
-    torrents: [ {
-        type: String,
-        // reff to torents model
-    } ]
+    torrents:  {
+        type: [
+            {
+            type: "ObjectId",
+            // reff users uploaded torrents
+            }],
+        default: []
+    } 
 });
 
 userSchema.pre("save", async function () {

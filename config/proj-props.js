@@ -6,16 +6,15 @@ module.exports = {
             wrongUname: "Incorrect username or password.",
             wrongEmail: "Incorrect email or password.",
             emailUsed: "Email is already taken, please use another",
-            notEqualPass: "Both passwords must match",
             notLogged: "You need to be logged in.",
             loggedUser: "You are already logged in.",
         },
         inputErr: {
-            wrongLength: (field = "Field", limit = "the minimum") => `${field} should be more than ${limit} characters.`,
+            wrongLength: (field = "Field", limit = "the minimum") => `${field} should be between than ${limit} characters.`,
             emptyField: "Name, Price and ImageUrl are required.",
             wrongChar: "Latin characters and numbers.",
             wrongUrl: "Image url is required and should point to actual image",
-            notNumber: "Price should be a number",
+            notNumber: (age) => `${age} should be a number`,
             notUnique: (name = "ID") => `${name} should be unique`,
         },
         commentErr: {

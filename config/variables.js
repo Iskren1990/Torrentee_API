@@ -21,7 +21,7 @@ development: {
     dbOpt: { useUnifiedTopology: true,  useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false },
     uri: (conf) => `mongodb+srv://${conf.dbuser}:${conf.dbpass}@cluster0.4dqi4.mongodb.net/${conf.dbname}?retryWrites=true&w=majority`,
     cors: {
-        origin: "*", 
+        origin: "http://localhost:3000", 
         credentials: true
     }
 }
