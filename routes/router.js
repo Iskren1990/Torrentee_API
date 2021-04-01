@@ -1,5 +1,6 @@
+// const { loggedUserStop, guestUserStop, loginRegForm } = require("../middleware/index");
 const { loginRegForm } = require("../middleware/index");
-const { register, login, logout } = require("../controllers/index");
+const { register, login, logout, profile } = require("../controllers/index");
 const path = require("path");
 
 const filesPath = path.resolve(__dirname, "../public/dist/");
@@ -10,6 +11,8 @@ module.exports = (app) => {
     app.post("/api/user/register", loginRegForm, register.post);
     app.post("/api/user/login", loginRegForm, login.post);
     app.get("/api/user/logout", logout.get);
+    app.get("/api/user/profile",  profile.get);
+    app.put("/api/user/profile/edit", profile.put);
 
     // app.post("/api/user/register", loggedUserStop, loginRegForm, register.post);
     // app.post("/api/user/login", loggedUserStop, login.post);

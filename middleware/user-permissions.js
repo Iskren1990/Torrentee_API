@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { key } = require("../config/variables");
 const { errorMsg } = require("../config/proj-props");
+const {JWTReniew} = require("../utils/auth");
 
 function guestUserStop(req, res, next) {
     if (req.user.isLogged === false) {
@@ -23,6 +24,7 @@ function loggedUserStop(req, res, next) {
 
 function userStatus(req, res, next) {
     const status = req.cookies.uid;
+
     if (status === undefined) {
         req.user = { isLogged: false };
     } else {
@@ -31,13 +33,18 @@ function userStatus(req, res, next) {
                 res.clearCookie("uid");
                 return { isLogged: false };
             };
-
+            JWTReniew(suc, 1);
+            delete suc.iat;
+            delete suc.exp;
             suc.isLogged = true;
+            
             return suc;
         });
     }
     next();
 }
+
+
 
 
 module.exports = {

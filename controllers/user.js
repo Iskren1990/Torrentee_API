@@ -1,5 +1,5 @@
 const { User } = require("../models/index");
-const createJWT = require("../utils/auth");
+const { createJWT } = require("../utils/auth");
 const bcrypt = require("bcrypt");
 const { errorMsg } = require("../config/proj-props");
 
@@ -8,13 +8,12 @@ const register = {
     post: async function (req, res) {
         const { username, email, password, age } = req.body;
         try {
-            const suc = await User.create({ username, email, password, age });
-            const token = createJWT({ id: suc._id, email, username, isLogged: true });
+            const userData = await User.create({ username, email, password, age });
+            const token = createJWT({ id: userData._id, email, username, isLogged: true });
 
             res.cookie("uid", token, { SameSite: "None" });
-            res.status(201).json({ id: suc._id, email, isLogged: true, username, email, password, age });
+            res.status(201).json({ id: userData._id, email, isLogged: true, username, email, age, avatar: userData.avatar });
         } catch (err) {
-            console.log(err);
             res.locals.error.push(errorMsg.userErr.emailUsed);
             res.status(400).json({ message: res.locals.error, err });
         }
@@ -24,17 +23,19 @@ const register = {
 const login = {
     post: async function (req, res) {
         try {
-            const dbRes = await User.findOne({ username: req.body.username });
+            const userData = await User.findOne({ username: req.body.username });
 
-            const { username, email, password, age, id = _id } = dbRes;
-            const isRegistered = bcrypt.compareSync(req.body.password, dbRes.password);
+            const { username, email, age, avatar, id = _id } = userData;
+            const isRegistered = bcrypt.compareSync(req.body.password, userData.password);
 
             if (isRegistered === false) { throw new Error(isRegistered) };
 
-            const token = createJWT({ username, email, password, age, id, isLogged: true });
+            const token = createJWT({ username, email, age, id, avatar, isLogged: true });
+
             res.cookie("uid", token);
-            res.status(200).json({ username, email, password, age, id });
+            res.status(200).json({ username, email, age, id, avatar, isLogged: true });
         } catch (err) {
+            console.log(err);
             res.locals.error.push(errorMsg.userErr.wrongCred);
             res.status(400).json({ message: [...res.locals.error], err });
         }
@@ -48,25 +49,37 @@ const logout = {
     }
 }
 
-// const profile = {
-//     put: async function (req, res) {
-//         try {
-//             const { firstName, lastName, email, id = _id, position, profilePic }
-//                 = await User.findOneAndUpdate({ _id: req.user.id }, req.body, { returnOriginal: false });
+const profile = {
+    get: async function (req, res) {
+        try {
+            
+            // const userData = await (await User.findOne({ _id: req.user.id })).populated("torrents");   -   add after Schema creation
+            const userData = await User.findOne({ _id: req.user.id });
+            const { username, email, age, avatar, torrents, id = _id, isLogged = req.user.isLogged } = userData;
+            res.status(200).json({ username, email, age, avatar, torrents, id, isLogged });
+        } catch (err) {
+            console.log(err);
+            res.locals.error.push(errorMsg.serverErr.general);
+            res.status(404).json({ message: [...res.locals.error], err, ...req.user });
+        }
+    },
+    put: async function (req, res) {
+        try {
+            const updatedUserData = await User.findOneAndUpdate({ _id: req.user.id }, req.body, { returnOriginal: false });
 
-//             const token = createJWT({ id, email, isLogged: true });
-//             res.cookie("uid", token);
-//             res.status(200).json({ firstName, lastName, email, id, position, profilePic });
-//         } catch (err) {
-//             res.locals.error.push(errorMsg.userErr.wrongCred);
-//             res.status(404).json({ message: [...res.locals.error], err });
-//         }
-//     }
-// }
+            const token = createJWT({ id, email, isLogged: true });
+            res.cookie("uid", token);
+            res.status(200).json(updatedUserData);
+        } catch (err) {
+            res.locals.error.push(errorMsg.serverErr.general);
+            res.status(404).json({ message: [...res.locals.error], err });
+        }
+    }
+}
 
 module.exports = {
     register,
     login,
     logout,
-    // profile
+    profile
 }
