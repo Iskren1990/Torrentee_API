@@ -52,10 +52,11 @@ const logout = {
 const profile = {
     get: async function (req, res) {
         try {
-            
             // const userData = await (await User.findOne({ _id: req.user.id })).populated("torrents");   -   add after Schema creation
             const userData = await User.findOne({ _id: req.user.id });
+
             const { username, email, age, avatar, torrents, id = _id, isLogged = req.user.isLogged } = userData;
+
             res.status(200).json({ username, email, age, avatar, torrents, id, isLogged });
         } catch (err) {
             console.log(err);
@@ -67,7 +68,9 @@ const profile = {
         try {
             const updatedUserData = await User.findOneAndUpdate({ _id: req.user.id }, req.body, { returnOriginal: false });
 
-            const token = createJWT({ id, email, isLogged: true });
+            const { username, email, age, avatar, torrents, id = _id, isLogged = req.user.isLogged } = updatedUserData;
+
+            const token = createJWT({ username, email, age, avatar, torrents, id, isLogged });
             res.cookie("uid", token);
             res.status(200).json(updatedUserData);
         } catch (err) {

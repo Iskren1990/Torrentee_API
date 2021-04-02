@@ -11,8 +11,8 @@ module.exports = (app) => {
     app.post("/api/user/register", loginRegForm, register.post);
     app.post("/api/user/login", loginRegForm, login.post);
     app.get("/api/user/logout", logout.get);
-    app.get("/api/user/profile",  profile.get);
     app.put("/api/user/profile/edit", profile.put);
+    app.get("/api/user/profile",  profile.get);
 
     // app.post("/api/user/register", loggedUserStop, loginRegForm, register.post);
     // app.post("/api/user/login", loggedUserStop, login.post);
