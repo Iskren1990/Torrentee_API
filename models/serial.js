@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const movieSchema = new mongoose.Schema({
+const serialSchema = new mongoose.Schema({
     imdbID: {
         type: String,
         required: true,
@@ -70,4 +70,4 @@ const movieSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Movie", movieSchema);
+module.exports = mongoose.model("Serial", serialSchema);

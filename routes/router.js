@@ -16,6 +16,8 @@ module.exports = (app) => {
     app.get("/api/user/profile", profile.get);
 
     app.post("/api/torrents/upload", upload.post);
+    app.get("/api/torrents/list", upload.get);
+
 
     // app.post("/api/user/register", loggedUserStop, loginRegForm, register.post);
     // app.post("/api/user/login", loggedUserStop, login.post);
