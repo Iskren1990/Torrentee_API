@@ -32,10 +32,12 @@ const upload = {
 const torrents = {
     get: async (req, res) => {
         try {
+
+            const owner = req.query.uploader ? {uploader: req.query.uploader} : {};
             const sort = req.query.downloads ? {downloads: -1} : {_id: -1};
             const skip = (req.query.limit * req.query.page) || 0;
 
-            const data = await Torrents.find().sort(sort).skip(skip).limit(+req.query.limit);
+            const data = await Torrents.find(owner).sort(sort).skip(skip).limit(+req.query.limit);
 
             res.status(200).json(data);
         } catch (error) {
