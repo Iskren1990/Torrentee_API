@@ -68,6 +68,9 @@ const movieSchema = new mongoose.Schema({
         type: String,
         default: "N/A"
     },
+    videoId: [{
+        type: String,
+    }]
 });
 
 module.exports = mongoose.model("Movie", movieSchema);

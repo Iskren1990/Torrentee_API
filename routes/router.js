@@ -1,7 +1,7 @@
 // const { loggedUserStop, guestUserStop, loginRegForm } = require("../middleware/index");
 const { loginRegForm } = require("../middleware/index");
 const { register, login, logout, profile } = require("../controllers/index");
-const { upload } = require("../controllers/index");
+const { upload, torrents, count, torrent } = require("../controllers/index");
 // const path = require("path");
 
 // const filesPath = path.resolve(__dirname, "../public/dist/");
@@ -16,7 +16,12 @@ module.exports = (app) => {
     app.get("/api/user/profile", profile.get);
 
     app.post("/api/torrents/upload", upload.post);
-    app.get("/api/torrents/list", upload.get);
+    app.get("/api/torrents/list", torrents.get);
+    app.get("/api/torrents/count", count.get);
+    app.get("/api/torrents/:id", torrent.get);
+    app.put("/api/torrents/:id", torrent.put);
+
+
 
 
     // app.post("/api/user/register", loggedUserStop, loginRegForm, register.post);

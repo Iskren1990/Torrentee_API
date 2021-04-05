@@ -19,28 +19,8 @@ const torrentsSchema = new mongoose.Schema({
     },
     uploader: {
         type: "ObjectId",
-        reff: "User",
+        ref: "User",
         required: true
-    },
-    movies: {
-        type: "ObjectId",
-        reff: "Movie",
-    },
-    games: {
-        type: "ObjectId",
-        reff: "Game",
-    },
-    books: {
-        type: "ObjectId",
-        reff: "Game",
-    },
-    music: {
-        type: "ObjectId",
-        reff: "Music",
-    },
-    serial: {
-        type: "ObjectId",
-        reff: "Serial",
     },
     downloads: {
         type: Number,
@@ -51,7 +31,27 @@ const torrentsSchema = new mongoose.Schema({
         default: () => new Date().toLocaleString("en-GB",
             { year: 'numeric', month: 'long', day: 'numeric', hour: "2-digit", minute: "2-digit", hour12: false }
         )
-    }
+    },
+    movies: {
+        type: "ObjectId",
+        ref: "Movie",
+    },
+    games: {
+        type: "ObjectId",
+        ref: "Game",
+    },
+    books: {
+        type: "ObjectId",
+        ref: "Game",
+    },
+    music: {
+        type: "ObjectId",
+        ref: "Music",
+    },
+    serial: {
+        type: "ObjectId",
+        ref: "Serial",
+    },
 });
 
 module.exports = mongoose.model("Torrents", torrentsSchema);
