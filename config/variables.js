@@ -8,7 +8,7 @@ module.exports = {
     dbOpt: { useUnifiedTopology: true,  useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false },
     uri: (conf) => `mongodb+srv://${conf.dbuser}:${conf.dbpass}@cluster0.4dqi4.mongodb.net/${conf.dbname}?retryWrites=true&w=majority`,
     cors: {
-        origin: "*",
+        origin: "https://torentee-client.herokuapp.com",
         credentials: true
     }
 },
