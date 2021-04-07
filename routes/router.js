@@ -2,6 +2,8 @@
 const { loginRegForm } = require("../middleware/index");
 const { register, login, logout, profile } = require("../controllers/index");
 const { upload, torrents, count, torrent } = require("../controllers/index");
+const { NewsAPI } = require("../controllers/index");
+
 // const path = require("path");
 
 // const filesPath = path.resolve(__dirname, "../public/dist/");
@@ -21,7 +23,7 @@ module.exports = (app) => {
     app.get("/api/torrents/:id", torrent.get);
     app.put("/api/torrents/:id", torrent.put);
 
-
+    app.get("/api/news", NewsAPI.get);
 
 
     // app.post("/api/user/register", loggedUserStop, loginRegForm, register.post);

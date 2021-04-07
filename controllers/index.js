@@ -1,3 +1,4 @@
+const NewsAPI = require("./news");
 const user = require("./user");
 const torrents = require("./torrents");
 
@@ -5,4 +6,5 @@ const torrents = require("./torrents");
 module.exports = {
     ...user,
     ...torrents,
+    ...NewsAPI,
 }
