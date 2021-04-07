@@ -7,9 +7,10 @@ const YoutubeAPI = {
         try {
             res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${search}&key=${tubeKey}`)
             tubeRes = await res.json();
-            return tubeRes.map(x => x.items[0].id.videoId);
+
+            return tubeRes.items.filter(item => item.id.videoId !== null).map(item => item.id.videoId);
         } catch (error) {
-            console.log(error, tubeRes.message);
+            console.log(error, tubeRes);
             return [];
         }
     }

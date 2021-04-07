@@ -13,8 +13,9 @@ const upload = {
     post: async (req, res) => {
         try {
 
-            req.body.videoId = await YoutubeAPI.get(req.body.title);
-            
+            if (["movies", "games", "serial"].some(x=> x === req.body.category)) {
+                req.body.videoId = await YoutubeAPI.get(req.body.title + " trailer");
+            }
             const torrentData = await Models[req.body.category](req.body);
 
             const torrnetUserRelation = {...req.body, uploader: req.user.id, title: req.body.title};
