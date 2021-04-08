@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const torrentsSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        index: true,
+        text: true,
     },
     category: {
         type: String,

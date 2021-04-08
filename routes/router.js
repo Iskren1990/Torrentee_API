@@ -22,6 +22,7 @@ module.exports = (app) => {
     app.get("/api/torrents/count", count.get);
     app.get("/api/torrents/:id", torrent.get);
     app.put("/api/torrents/:id", torrent.put);
+    app.delete("/api/torrents/:id", torrent.delete);
 
     app.get("/api/news", NewsAPI.get);
 
