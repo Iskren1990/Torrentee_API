@@ -52,14 +52,20 @@ const logout = {
 const profile = {
     get: async function (req, res) {
         try {
-            // const userData = await (await User.findOne({ _id: req.user.id })).populated("torrents");   -   add after Schema creation
             const userData = await User.findOne({ _id: req.user.id });
 
-            const { username, email, age, avatar, torrents, id = _id, isLogged = req.user.isLogged } = userData;
+            const {
+                username,
+                email,
+                age,
+                avatar,
+                torrents,
+                id = _id,
+                isLogged = req.user.isLogged
+            } = userData;
 
             res.status(200).json({ username, email, age, avatar, torrents, id, isLogged });
         } catch (err) {
-            console.log(err);
             res.locals.error.push(errorMsg.serverErr.general);
             res.status(404).json({ message: [...res.locals.error], err, ...req.user });
         }
@@ -68,11 +74,19 @@ const profile = {
         try {
             const updatedUserData = await User.findOneAndUpdate({ _id: req.user.id }, req.body, { returnOriginal: false });
 
-            const { username, email, age, avatar, torrents, id = _id, isLogged = req.user.isLogged } = updatedUserData;
+            const {
+                username,
+                email,
+                age,
+                avatar,
+                torrents,
+                id = _id,
+                isLogged = req.user.isLogged
+            } = updatedUserData;
 
             const token = createJWT({ username, email, age, avatar, torrents, id, isLogged });
             res.cookie("uid", token);
-            res.status(200).json(updatedUserData);
+            res.status(200).json({ username, email, age, avatar, torrents, id, isLogged });
         } catch (err) {
             res.locals.error.push(errorMsg.serverErr.general);
             res.status(404).json({ message: [...res.locals.error], err });
