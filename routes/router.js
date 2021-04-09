@@ -3,10 +3,9 @@ const { loginRegForm } = require("../middleware/index");
 const { register, login, logout, profile } = require("../controllers/index");
 const { upload, torrents, count, torrent } = require("../controllers/index");
 const { NewsAPI } = require("../controllers/index");
-
-// const path = require("path");
-
-// const filesPath = path.resolve(__dirname, "../public/dist/");
+const { error } = require("../controllers/index");
+const path = require("path");
+const filesPath = path.resolve(__dirname, "../build");
 
 module.exports = (app) => {
 
@@ -24,6 +23,8 @@ module.exports = (app) => {
     app.put("/api/torrents/:id", torrent.put);
     app.delete("/api/torrents/:id", torrent.delete);
 
+    app.post("/api/error", error.post);
+
     app.get("/api/news", NewsAPI.get);
 
 
@@ -33,7 +34,7 @@ module.exports = (app) => {
     // app.get("/api/user/logout", logout.get);
 
     // serve
-    app.all("*", (req, res) => res.status(400).json({message: "app.all reached"}));
+    // app.all("*", (req, res) => res.status(400).json({message: "app.all reached"}));
 
-    // app.all("*", (req, res) => res.sendFile(`${filesPath}/index.html`));
+    app.all("*", (req, res) => res.sendFile(`${filesPath}/index.html`));
 }

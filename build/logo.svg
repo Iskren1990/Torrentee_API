@@ -1,0 +1,22 @@
+<svg width="810" height="610" xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <defs>
+            <style type="text/css">
+                @font-face {
+                font-family: "Great Vibes";
+                src: url('https://fonts.googleapis.com/css2?family=Great+Vibes');
+                }
+            </style>
+        </defs>
+     
+        <style><![CDATA[svg text{stroke:none}]]></style>
+        <title>Layer 1</title>
+        <path id="svg_1" d="m-276.10684,442.36292l0.76282,0l0.23572,-0.54067l0.23572,0.54067l0.76282,0l-0.61713,0.33415l0.23573,0.54067l-0.61713,-0.33416l-0.61713,0.33416l0.23573,-0.54067l-0.61713,-0.33415l-0.00002,0z" opacity="undefined" stroke="#54ff1f" />
+        <text fill="#54ff1f" stroke="#54ff1f" opacity="undefined" x="320.55586" y="266.95754" id="svg_2" font-size="50" style="font-family:'Great Vibes', cursive" text-anchor="start" xml:space="preserve" font-weight="normal" font-style="normal" transform="matrix(5.65946, 0, 0, 9.20788, -1621.35, -1924.74)">T</text>
+        <line stroke-linecap="null" stroke-linejoin="null" id="svg_7" y2="408" x2="26.5" y1="602" x1="215.5" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="20" stroke="#54ff1f" fill="none" />
+        <line transform="rotate(-0.313319, 215, 214.5)" stroke-linecap="null" stroke-linejoin="null" id="svg_8" y2="415.98902" x2="19.48906" y1="13.01096" x1="410.51091" opacity="undefined" stroke-opacity="null" stroke-dasharray="null" stroke-width="20" stroke="#54ff1f" fill="none" />
+        <line stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="408" x2="780.5" y1="17.00001" x1="400.49998" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="20" stroke="#54ff1f" fill="none" />
+        <line stroke-linecap="null" stroke-linejoin="null" id="svg_14" y2="602" x2="591.5" y1="402.99999" x1="789.5" opacity="undefined" fill-opacity="#54ff1f" stroke-opacity="null" stroke-dasharray="null" stroke-width="20" stroke="#54ff1f" fill="#54ff1f" />
+    </g>
+
+</svg>
