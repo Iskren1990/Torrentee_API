@@ -10,7 +10,7 @@ function expressConf(app, options) {
   app.use(express.json());
   app.use(CP());
 
-  app.use(express.static("public/dist"));
+  app.use(express.static("build"));
 }
 
 module.exports = expressConf;
