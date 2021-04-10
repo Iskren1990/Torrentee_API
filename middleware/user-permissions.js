@@ -1,11 +1,13 @@
 const jwt = require("jsonwebtoken");
 const { key } = require("../config/variables");
-const { errorMsg } = require("../config/proj-props");
+const { errorMsg } = require("../config/proj-messages");
 const {JWTReniew} = require("../utils/auth");
 
 function guestUserStop(req, res, next) {
     if (req.user.isLogged === false) {
-        res.status(401).json({ message: [errorMsg.userErr.notLogged] });
+        res.status(401);
+        res.locals.error.push(errorMsg.userErr.notLogged);
+        next({ message: errorMsg.userErr.notLogged });
         return;
     }
 
@@ -15,7 +17,9 @@ function guestUserStop(req, res, next) {
 function loggedUserStop(req, res, next) {
     
     if (req.user.isLogged === true) {
-        res.status(400).json({message: errorMsg.userErr.loggedUser });
+        res.status(400);
+        res.locals.error.push(errorMsg.userErr.loggedUser);
+        next({message: errorMsg.userErr.loggedUser });
         return;
     }
 

@@ -1,7 +1,7 @@
 const { User } = require("../models/index");
 const { createJWT } = require("../utils/auth");
 const bcrypt = require("bcrypt");
-const { errorMsg } = require("../config/proj-props");
+const { errorMsg } = require("../config/proj-messages");
 
 
 const register = {
@@ -35,7 +35,6 @@ const login = {
             res.cookie("uid", token);
             res.status(200).json({ username, email, age, id, avatar, isLogged: true });
         } catch (err) {
-            console.log(err);
             res.locals.error.push(errorMsg.userErr.wrongCred);
             res.status(400).json({ message: [...res.locals.error], err });
         }
@@ -63,7 +62,7 @@ const profile = {
                 id = _id,
                 isLogged = req.user.isLogged
             } = userData;
-
+            
             res.status(200).json({ username, email, age, avatar, torrents, id, isLogged });
         } catch (err) {
             res.locals.error.push(errorMsg.serverErr.general);

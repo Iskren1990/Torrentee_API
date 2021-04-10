@@ -5,9 +5,13 @@ function errCtn(req, res, next) {
 
 function globalErrorHandler(err, req, res, next) {
     
-    const body = { ...req.user, ...req.body, message: res.locals.error};
-    console.log("Global error: ", err);
-    res.status(500).json(body);
+    const body = { ...req.user, ...req.body, err, message: res.locals.error};
+    // console.log("Global error: ", err);
+    if (!res.headersSent) {
+        res.status(500)
+    }
+
+    res.json(body);
 }
 
 module.exports = {

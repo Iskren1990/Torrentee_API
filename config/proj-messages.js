@@ -27,10 +27,8 @@ module.exports = {
         replyErr: {
             replyNotCreated: "Could not add a reply",
         },
-        eventErr: {
-            eventNotFound: "Chosen event was not found",
-            eventNotCreated: "Event was nt created",
-            eventNotEdited: "Delete Error",
+        torrentErr: {
+            requiredField: (field = "Field") => `${field} is required!`
         },
         serverErr: {
             serverErr: "It’s not you. It’s us. Give it another try, please.",
