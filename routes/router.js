@@ -13,7 +13,7 @@ module.exports = (app) => {
     app.post("/api/user/register", loginRegForm, register.post);
     app.post("/api/user/login", loginRegForm, login.post);
     app.get("/api/user/logout", logout.get);
-    app.put("/api/user/profile/edit", profile.put);
+    app.put("/api/user/profile/edit", loginRegForm, profile.put);
     app.get("/api/user/profile", profile.get);
 
     app.post("/api/torrents/upload", upload.post);

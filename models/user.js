@@ -22,16 +22,8 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: "",
-    },
-    torrents:  {
-        type: [
-            {
-            type: "ObjectId",
-            // reff users uploaded torrents
-            }],
-        default: []
-    } 
+        default: "/static/media/space-leader.d453f24b.svg",
+    }
 });
 
 userSchema.pre("save", async function () {

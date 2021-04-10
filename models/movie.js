@@ -41,8 +41,8 @@ const movieSchema = new mongoose.Schema({
         default: "N/A"
     },
     imdbRating: {
-        type: String,
-        default: "N/A"
+        type: Number,
+        default: "0"
     },
     country: {
         type: String,

@@ -16,6 +16,9 @@ const upload = {
             if (["movies", "games", "serial"].some(x => x === req.body.category)) {
                 req.body.videoId = await YoutubeAPI.get(req.body.title + " trailer");
             }
+            // if (["movies", "games", "serial"].some(x => x === req.body.category)) {
+            //     req.body.videoId = await YoutubeAPI.get(req.body.title + " trailer");
+            // }
             const torrentData = await Models[req.body.category]().create(req.body);
 
             const torrnetUserRelation = { ...req.body, uploader: req.user.id, title: req.body.title };
@@ -34,13 +37,14 @@ const torrents = {
     get: async (req, res) => {
         try {
             const search = {};
-            
+            console.log(req.query);
             req.query.uploader ? search.uploader = req.query.uploader : null;
             req.query.search ? search.$text = { $search: req.query.search }  : null;
+            req.query.imdbRating ? search.imdbRating = { $gte: req.query.imdbRating }  : null;
 
             const sort = req.query.downloads ? { downloads: -1 } : { _id: -1 };
             const skip = (req.query.limit * req.query.page) || 0;
-
+            console.log(search);
             const data = await Torrents.find(search).sort(sort).skip(skip).limit(+req.query.limit);
             res.status(200).json(data);
         } catch (error) {
