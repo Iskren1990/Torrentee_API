@@ -20,7 +20,7 @@ function loginRegFormValidation(req, res, next) {
         res.locals.error.push(errorMsg.inputErr.wrongLength("Username and Password", "3 and 9"));
         res.locals.error.push(errorMsg.inputErr.wrongChar);
     }
-    if (age !== undefined && /[^\d]{1,2}/.test(age) === false) {
+    if (age !== undefined && /^\d{1,2}$/.test(age) === false) {
         res.locals.error.push(errorMsg.inputErr.notNumber("Age"));
     }
 
